@@ -31,12 +31,16 @@
 
 var usb = require('usb')
 var CMD = {
-            UP: 0x02,
-            DOWN: 0x01,
-            LEFT: 0x04,
-            RIGHT: 0x08,
-            FIRE: 0x10,
-            STOP: 0x20
+            UP: 8,
+            DOWN: 2,
+            LEFT: 4,
+            RIGHT: 6,
+            UPLEFT: 7,
+            UPRIGHT: 9,
+            DOWNRIGHT: 3,
+            DOWNLEFT: 1,
+            FIRE: 5,
+            STOP: 0
         };
 
 
@@ -104,6 +108,38 @@ TenxDriver.prototype.send_command = function(command) {
                          0, 0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0, 0]);
+  up_left_msg = new Buffer([0, 1, 0, 1, 0, 0, 8, 8,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0]);
+  up_right_msg = new Buffer([0, 0, 1, 1, 0, 0, 8, 8,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0]);
+  down_left_msg = new Buffer([0, 1, 0, 0, 1, 0, 8, 8,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0]);
+  down_right_msg = new Buffer([0, 0, 1, 0, 1, 0, 8, 8,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0, 0]);
   fire_msg = new Buffer([0, 0, 0, 0, 0, 1, 8, 8,
                          0, 0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0, 0,
@@ -127,6 +163,10 @@ TenxDriver.prototype.send_command = function(command) {
   if (command == CMD.RIGHT) this.launcher.controlTransfer(0x21,0x09,0x02,0x00, right_msg);
   if (command == CMD.UP) this.launcher.controlTransfer(0x21,0x09,0x02,0x00, up_msg);
   if (command == CMD.DOWN) this.launcher.controlTransfer(0x21,0x09,0x02,0x00, down_msg);
+  if (command == CMD.UPLEFT) this.launcher.controlTransfer(0x21,0x09,0x02,0x00, up_left_msg);
+  if (command == CMD.UPRIGHT) this.launcher.controlTransfer(0x21,0x09,0x02,0x00, up_right_msg);
+  if (command == CMD.DOWNLEFT) this.launcher.controlTransfer(0x21,0x09,0x02,0x00, down_left_msg);
+  if (command == CMD.DOWNRIGHT) this.launcher.controlTransfer(0x21,0x09,0x02,0x00, down_right_msg);
   if (command == CMD.STOP) this.launcher.controlTransfer(0x21,0x09,0x02,0x00, stop_msg);
   if (command == CMD.FIRE) this.launcher.controlTransfer(0x21,0x09,0x02,0x00, fire_msg);
 }
@@ -135,6 +175,10 @@ TenxDriver.prototype.up = function() { this.send_command(CMD.UP)};
 TenxDriver.prototype.down = function() { this.send_command(CMD.DOWN)};
 TenxDriver.prototype.left = function() { this.send_command(CMD.LEFT)};
 TenxDriver.prototype.right = function() { this.send_command(CMD.RIGHT)};
+TenxDriver.prototype.upleft = function() { this.send_command(CMD.UPLEFT)};
+TenxDriver.prototype.upright = function() { this.send_command(CMD.UPRIGHT)};
+TenxDriver.prototype.downleft = function() { this.send_command(CMD.DOWNLEFT)};
+TenxDriver.prototype.downright = function() { this.send_command(CMD.DOWNRIGHT)};
 TenxDriver.prototype.stop = function() { this.send_command(CMD.STOP)};
 TenxDriver.prototype.fire = function() { this.send_command(CMD.FIRE)};
 

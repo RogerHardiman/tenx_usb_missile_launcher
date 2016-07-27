@@ -56,6 +56,13 @@ function read_and_process_keyboard() {
 		else if (key && key.name == 'down')  {tenx.down(); s=1}
 		else if (key && key.name == 'left')  {tenx.left(); s=1}
 		else if (key && key.name == 'right') {tenx.right(); s=1}
+		else if (ch  && ch=='7')             {tenx.upleft(); s=1}
+		else if (ch  && ch=='8')             {tenx.up(); s=1}
+		else if (ch  && ch=='9')             {tenx.upright(); s=1}
+		else if (ch  && ch=='4')             {tenx.left(); s=1}
+		else if (ch  && ch=='6')             {tenx.right(); s=1}
+		else if (ch  && ch=='1')             {tenx.downleft(); s=1}
+		else if (ch  && ch=='3')             {tenx.downright(); s=1}
 		else if (ch  && ch=='f')             {tenx.fire();}
 		else if (ch  && ch=='s')             {tenx.stop();}
 
