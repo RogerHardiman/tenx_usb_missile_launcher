@@ -50,6 +50,8 @@ function TenxDriver() {
 TenxDriver.prototype.open = function() {
   // Find and Open
   this.launcher = usb.findByIds(0x1130,0x202);
+  if (!this.launcher) return;
+
   this.launcher.open();
 
   // Detach Kernel Driver
@@ -63,6 +65,8 @@ TenxDriver.prototype.open = function() {
 }
 
 TenxDriver.prototype.close = function() {
+  if (!this.launcher) return;
+
   if (!this.launcher.interfaces[0].isKernelDriverActive()) {
     this.launcher.interfaces[0].attachKernelDriver();
   }
@@ -156,6 +160,8 @@ TenxDriver.prototype.send_command = function(command) {
                          0, 0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0, 0]);
+
+  if (!this.launcher) return;
 
   this.launcher.controlTransfer(0x21,0x09,0x02,0x01,header_1);
   this.launcher.controlTransfer(0x21,0x09,0x02,0x01,header_2);
