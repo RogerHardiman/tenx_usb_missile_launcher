@@ -1,8 +1,8 @@
 {
-  "name": "tenx_driver",
-  "version": "1.0.0",
-  "description": "Control Tenx USB Missile Launcher",
-  "main": "keyboard.js",
+  "name": "tenx-usb-missile-launcher-driver",
+  "version": "0.2.0",
+  "description": "Control Tenx USB Missile Launcher: Pan, Tilt and Fire. Sold in the UK by Marks and Spenser. USB ID 0x1130 0x0202",
+  "main": "tenx_driver.js",
   "dependencies": {
     "keypress": "^0.2.1"
   },
@@ -10,6 +10,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Roger Hardiman",
   "license": "MIT"
 }
