@@ -67,7 +67,7 @@ function read_and_process_keyboard() {
 		else if (ch  && ch=='s')             {tenx.stop();}
 
 		// Set a timer to trigger an automatic stop if required
-		if (s==1) stop_timer = setTimeout(tenx.stop(), STOP_DELAY_MS);
+		if (s==1) stop_timer = setTimeout(function() { tenx.stop() }, STOP_DELAY_MS);
 
 	});
 }
